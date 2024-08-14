@@ -18,6 +18,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/transactions') }}">Transactions</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('transactions.summary') }}">Monthly Summary</a>
+                    </li>
                 </ul>
             </div>
         </div>

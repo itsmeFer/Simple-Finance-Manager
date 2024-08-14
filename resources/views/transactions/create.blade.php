@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Create Transaction</h1>
+    <h1>Add New Transaction</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -35,7 +35,7 @@
             <label for="transaction_date" class="form-label">Transaction Date</label>
             <input type="date" class="form-control" id="transaction_date" name="transaction_date" value="{{ old('transaction_date') }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Save Transaction</button>
+        <button type="submit" class="btn btn-primary">Add Transaction</button>
     </form>
 </div>
 @endsection
