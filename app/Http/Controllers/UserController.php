@@ -8,14 +8,8 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index()
-{
-    $users = User::all();
-
-    if ($users->isEmpty()) {
-        return redirect()->back()->with('error', 'No users found.');
+    {
+        $users = User::all(); // Ambil semua pengguna dari database
+        return view('users.index', compact('users')); // Kirim variabel $users ke view
     }
-
-    return view('users.index', compact('users'));
-}
-
 }

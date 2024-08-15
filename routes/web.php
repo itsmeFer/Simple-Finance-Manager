@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransactionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +35,8 @@ use App\Http\Controllers\UserController;
 Route::get('/last-login', [UserController::class, 'lastLogin'])->name('last-login');
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::resource('transactions', TransactionController::class);
+Route::get('/transactions/summary', [TransactionController::class, 'monthlySummary'])->name('transactions.summary');
+
 
 require __DIR__.'/auth.php';

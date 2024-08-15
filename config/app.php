@@ -69,7 +69,10 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // config/app.php
+
+    'timezone' => 'Asia/Jakarta', // Sesuaikan dengan zona waktu lokal Anda
+
 
     /*
     |--------------------------------------------------------------------------

@@ -1,9 +1,13 @@
-@extends('layouts.app')
+<!-- resources/views/users/index.blade.php -->
 
-@section('content')
-<div class="container">
-    <h1>User List</h1>
-    <table class="table">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users List</title>
+</head>
+<body>
+    <h1>Users List</h1>
+    <table border="1">
         <thead>
             <tr>
                 <th>Name</th>
@@ -12,18 +16,20 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($users as $user)
+            @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user->name ?? 'Unknown' }}</td>
-                    <td>{{ $user->email ?? 'Unknown' }}</td>
-                    <td>{{ $user->last_login_at ? $user->last_login_at->format('d M Y, H:i') : 'Never' }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>
+                        @if ($user->last_login_at)
+                            {{ \Carbon\Carbon::parse($user->last_login_at)->format('d-m-Y H:i:s') }}
+                        @else
+                            Never
+                        @endif
+                    </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="3">No users found.</td>
-                </tr>
-            @endforelse
+            @endforeach
         </tbody>
     </table>
-</div>
-@endsection
+</body>
+</html>

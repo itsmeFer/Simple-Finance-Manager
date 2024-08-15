@@ -63,17 +63,17 @@ class TransactionController extends Controller
     }
 
     public function monthlySummary()
-    {
-        $currentMonth = Carbon::now()->month;
+{
+    $currentMonth = Carbon::now()->month;
 
-        $totalIncome = Transaction::where('type', 'income')
-            ->whereMonth('transaction_date', $currentMonth)
-            ->sum('amount');
+    $totalIncome = Transaction::where('type', 'income')
+        ->whereMonth('transaction_date', $currentMonth)
+        ->sum('amount');
 
-        $totalExpense = Transaction::where('type', 'expense')
-            ->whereMonth('transaction_date', $currentMonth)
-            ->sum('amount');
+    $totalExpense = Transaction::where('type', 'expense')
+        ->whereMonth('transaction_date', $currentMonth)
+        ->sum('amount');
 
-        return view('transactions.summary', compact('totalIncome', 'totalExpense'));
-    }
+    return view('transactions.summary', compact('totalIncome', 'totalExpense'));
+}
 }
