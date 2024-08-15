@@ -37,6 +37,10 @@ Route::get('/last-login', [UserController::class, 'lastLogin'])->name('last-logi
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::resource('transactions', TransactionController::class);
 Route::get('/transactions/summary', [TransactionController::class, 'monthlySummary'])->name('transactions.summary');
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
 
 
 require __DIR__.'/auth.php';

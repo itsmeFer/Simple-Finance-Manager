@@ -1,17 +1,30 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<!-- resources/views/dashboard.blade.php -->
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <!-- Include Tailwind CSS here -->
+</head>
+<body>
+    <h1 class="text-2xl font-bold">Welcome to the Dashboard</h1>
+
+    <!-- Navigation Buttons -->
+    <div class="mt-4">
+        <a href="{{ route('users.index') }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">
+            Users
+        </a>
+        <a href="{{ route('transactions.index') }}" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+            Transactions
+        </a>
     </div>
-</x-app-layout>
+
+    <!-- Logout Button -->
+    <form method="POST" action="{{ route('logout') }}" class="mt-4">
+        @csrf
+        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+            Logout
+        </button>
+    </form>
+</body>
+</html>
