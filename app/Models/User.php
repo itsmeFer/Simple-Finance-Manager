@@ -23,6 +23,9 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $dates = [
+        'last_login_at',
+    ];
     /**
      * The attributes that should be hidden for serialization.
      *

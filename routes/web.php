@@ -1,24 +1,37 @@
 <?php
 
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/', function () {
-    return redirect()->route('transactions.index');
+    return view('welcome');
 });
 
-Route::resource('transactions', TransactionController::class)->except(['show']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('transactions/summary', [TransactionController::class, 'monthlySummary'])->name('transactions.summary');
-
-Route::get('/', function () {
-    return redirect()->route('transactions.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/last-login', [UserController::class, 'lastLogin'])->name('last-login');
+use App\Http\Controllers\UserController;
 
-Route::resource('transactions', TransactionController::class)->except(['show']);
+Route::get('/last-login', [UserController::class, 'lastLogin'])->name('last-login');
 
-Route::get('/', function () {
-    return redirect()->route('transactions.index');
-});
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-Route::resource('transactions', TransactionController::class)->except(['show']);
-Route::get('transactions/summary', [TransactionController::class, 'monthlySummary'])->name('transactions.summary');
+require __DIR__.'/auth.php';
