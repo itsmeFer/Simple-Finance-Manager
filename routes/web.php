@@ -43,4 +43,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 
+use App\Http\Controllers\SummaryController;
+
+Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
+
 require __DIR__.'/auth.php';
