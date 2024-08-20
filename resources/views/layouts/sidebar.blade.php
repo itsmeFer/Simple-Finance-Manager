@@ -1,17 +1,16 @@
-<!-- resources/views/layouts/app.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'App Name')</title>
+    <title>Users List</title>
+    <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <div class="flex flex-col md:flex-row">
+    <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-gray-800 text-gray-100 w-full md:w-1/4 h-screen z-10">
+        <div class="w-1/4 bg-gray-800 text-gray-100 h-screen">
             <div class="p-4">
                 <h1 class="text-xl font-bold">Menu</h1>
             </div>
@@ -35,10 +34,6 @@
             </nav>
         </div>
 
-        <!-- Main Content -->
-        <div class="w-full md:w-3/4 p-6">
-            @yield('content')
-        </div>
-    </div>
+       
 </body>
 </html>
