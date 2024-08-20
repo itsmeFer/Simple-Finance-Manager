@@ -8,11 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <div class="flex">
+    <div class="flex flex-col md:flex-row">
         <!-- Sidebar -->
-        <div class="w-1/4 bg-gray-800 text-gray-100 h-screen">
+        <div class="bg-gray-800 text-gray-100 w-full md:w-1/4 h-screen">
             <div class="p-4">
-                <h1 class="text-xl font-bold">Menu</h1>
+                <h1 class="text-xl font-bold">Dashboard</h1>
             </div>
             <nav class="mt-4">
                 <a href="{{ route('dashboard') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('dashboard') ? 'bg-gray-700 text-white' : '' }}">
@@ -33,7 +33,6 @@
                 </form>
             </nav>
         </div>
-
        
 </body>
 </html>

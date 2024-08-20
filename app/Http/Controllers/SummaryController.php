@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/SummaryController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -17,7 +15,10 @@ class SummaryController extends Controller
         // Menghitung total expense
         $totalExpense = Transaction::where('type', 'expense')->sum('amount');
 
+        // Menghitung nett profit
+        $nettProfit = $totalIncome - $totalExpense;
+
         // Mengirim data ke view
-        return view('summary.index', compact('totalIncome', 'totalExpense'));
+        return view('summary.index', compact('totalIncome', 'totalExpense', 'nettProfit'));
     }
 }

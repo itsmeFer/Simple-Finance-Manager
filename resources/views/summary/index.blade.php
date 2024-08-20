@@ -1,5 +1,3 @@
-<!-- resources/views/summary/index.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +14,7 @@
             <div class="p-4">
                 <h1 class="text-xl font-bold">Summary</h1>
             </div>
-            <nav class="mt-4">
+            <nav class="mt-4 flex flex-col h-full">
                 <a href="{{ route('dashboard') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('dashboard') ? 'bg-gray-700 text-white' : '' }}">
                     Dashboard
                 </a>
@@ -29,7 +27,7 @@
                 <a href="{{ route('summary') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('summary') ? 'bg-gray-700 text-white' : '' }}">
                     Summary
                 </a>
-                <form method="POST" action="{{ route('logout') }}" class="block py-2.5 px-4">
+                <form method="POST" action="{{ route('logout') }}" class="py-2.5 px-4 mt-auto">
                     @csrf
                     <button type="submit" class="w-full text-left hover:bg-gray-700 hover:text-white">Logout</button>
                 </form>
@@ -42,15 +40,21 @@
 
             <div class="flex space-x-4">
                 <!-- Income Section -->
-                <div class="w-1/2 bg-green-100 p-6 rounded-lg shadow-lg">
+                <div class="w-1/3 bg-green-100 p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-bold text-green-800">Total Income</h3>
                     <p class="mt-2 text-2xl font-semibold text-green-600">{{ number_format($totalIncome, 2) ?? '0.00' }}</p>
                 </div>
 
                 <!-- Expense Section -->
-                <div class="w-1/2 bg-red-100 p-6 rounded-lg shadow-lg">
+                <div class="w-1/3 bg-red-100 p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-bold text-red-800">Total Expense</h3>
                     <p class="mt-2 text-2xl font-semibold text-red-600">{{ number_format($totalExpense, 2) ?? '0.00' }}</p>
+                </div>
+
+                <!-- Nett Profit Section -->
+                <div class="w-1/3 bg-blue-100 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-blue-800">Nett Profit</h3>
+                    <p class="mt-2 text-2xl font-semibold text-blue-600">{{ number_format($nettProfit, 2) ?? '0.00' }}</p>
                 </div>
             </div>
 
