@@ -46,5 +46,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 use App\Http\Controllers\SummaryController;
 
 Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
+use App\Http\Controllers\ReportController;
+
+Route::get('/report/monthly', [ReportController::class, 'generateReport'])->name('report.monthly');
 
 require __DIR__.'/auth.php';
