@@ -50,4 +50,6 @@ use App\Http\Controllers\ReportController;
 
 Route::get('/report/monthly', [ReportController::class, 'generateReport'])->name('report.monthly');
 
+Route::get('/report/monthly', [ReportController::class, 'monthlyReport'])->name('report.monthly');
+
 require __DIR__.'/auth.php';

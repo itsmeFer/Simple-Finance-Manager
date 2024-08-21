@@ -2,31 +2,31 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class MonthlyReportExport implements FromArray, WithHeadings
+class MonthlyReportExport implements FromView
 {
-    protected $reportData;
+    public $transactions;
+    public $totalIncome;
+    public $totalExpense;
+    public $nettProfit;
 
-    public function __construct(array $reportData)
+    public function __construct($transactions, $totalIncome, $totalExpense, $nettProfit)
     {
-        $this->reportData = $reportData;
+        $this->transactions = $transactions;
+        $this->totalIncome = $totalIncome;
+        $this->totalExpense = $totalExpense;
+        $this->nettProfit = $nettProfit;
     }
 
-    public function array(): array
+    public function view(): View
     {
-        return [
-            ['Month', $this->reportData['month']],
-            ['Year', $this->reportData['year']],
-            ['Total Income', number_format($this->reportData['totalIncome'], 2)],
-            ['Total Expense', number_format($this->reportData['totalExpense'], 2)],
-            ['Nett Profit', number_format($this->reportData['nettProfit'], 2)],
-        ];
-    }
-
-    public function headings(): array
-    {
-        return [];
+        return view('reports.monthly_excel', [
+            'transactions' => $this->transactions,
+            'totalIncome' => $this->totalIncome,
+            'totalExpense' => $this->totalExpense,
+            'nettProfit' => $this->nettProfit,
+        ]);
     }
 }

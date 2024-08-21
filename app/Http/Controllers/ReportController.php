@@ -1,48 +1,44 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use Excel;
+use App\Exports\MonthlyReportExport;
 
 class ReportController extends Controller
 {
     public function generateReport(Request $request)
     {
-        $month = $request->input('month', date('m'));
-        $year = $request->input('year', date('Y'));
+        $format = $request->query('format', 'pdf');
 
-        $totalIncome = Transaction::where('type', 'income')
-                        ->whereMonth('created_at', $month)
-                        ->whereYear('created_at', $year)
-                        ->sum('amount');
+        $month = now()->format('F Y'); 
 
-        $totalExpense = Transaction::where('type', 'expense')
-                        ->whereMonth('created_at', $month)
-                        ->whereYear('created_at', $year)
-                        ->sum('amount');
+        $transactions = Transaction::whereMonth('created_at', now()->month)
+                                   ->whereYear('created_at', now()->year)
+                                   ->get();
 
+        $totalIncome = $transactions->where('type', 'income')->sum('amount');
+        $totalExpense = $transactions->where('type', 'expense')->sum('amount');
         $nettProfit = $totalIncome - $totalExpense;
 
         $reportData = [
-            'month' => $month,
-            'year' => $year,
+            'month' => $month,  
+            'transactions' => $transactions,
             'totalIncome' => $totalIncome,
             'totalExpense' => $totalExpense,
             'nettProfit' => $nettProfit,
         ];
 
-        if ($request->input('format') == 'pdf') {
-            $pdf = Pdf::loadView('reports.monthly', $reportData);
-            return $pdf->download("monthly_report_{$month}_{$year}.pdf");
+        if ($format === 'pdf') {
+            $pdf = PDF::loadView('reports.monthly_pdf', $reportData);
+            return $pdf->download('monthly_report.pdf');
+        } elseif ($format === 'excel') {
+            return Excel::download(new MonthlyReportExport($reportData), 'monthly_report.xlsx');
         }
-
-        if ($request->input('format') == 'excel') {
-            return Excel::download(new MonthlyReportExport($reportData), "monthly_report_{$month}_{$year}.xlsx");
-        }
-
-        return view('reports.monthly', $reportData);
     }
 }
