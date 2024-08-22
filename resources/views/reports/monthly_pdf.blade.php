@@ -5,12 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monthly Report - {{ $month }}</title>
+    <title>Monthly Report</title>
 </head>
 <body>
-    <h1>Monthly Report - {{ $month }}</h1>
+    <h1 style="text-align: center;">PT. FERDI PERKASA SELALU</h1>
+    <h2 style="text-align: center;">Laporan Bulanan Perusahaan</h2>
 
-    <table border="1" cellspacing="0" cellpadding="8">
+    <table border="1" cellspacing="0" cellpadding="8" style="width: 100%; margin-top: 20px;">
         <thead>
             <tr>
                 <th>Description</th>

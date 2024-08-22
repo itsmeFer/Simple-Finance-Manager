@@ -8,7 +8,8 @@
     <title>Monthly Report</title>
 </head>
 <body>
-    <h1>Monthly Report for {{ $month }} {{ $year }}</h1>  <!-- Tambahkan tahun -->
+    <h1 style="text-align: center;">PT. FERDI PERKASA SELALU</h1>
+    <h2 style="text-align: center;">Laporan Bulanan Perusahaan</h2>
 
     <table border="1" cellspacing="0" cellpadding="8">
         <thead>
