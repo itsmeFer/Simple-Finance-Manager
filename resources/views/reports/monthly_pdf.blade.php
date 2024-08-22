@@ -19,7 +19,7 @@
                 <th>Date</th>
             </tr>
         </thead>
-        <tbody>monthly_pdf.blade.php
+        <tbody>
             @foreach($transactions as $transaction)
             <tr>
                 <td>{{ $transaction['description'] }}</td>

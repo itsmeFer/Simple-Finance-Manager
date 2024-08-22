@@ -1,6 +1,6 @@
 <?php
 
-
+// app/Http/Controllers/ReportController.php
 
 namespace App\Http\Controllers;
 
@@ -12,33 +12,38 @@ use App\Exports\MonthlyReportExport;
 
 class ReportController extends Controller
 {
-    public function generateReport(Request $request)
-    {
-        $format = $request->query('format', 'pdf');
+    // app/Http/Controllers/ReportController.php
 
-        $month = now()->format('F Y'); 
+public function generateReport(Request $request)
+{
+    $format = $request->query('format', 'pdf');
 
-        $transactions = Transaction::whereMonth('created_at', now()->month)
-                                   ->whereYear('created_at', now()->year)
-                                   ->get();
+    $month = now()->format('F');
+    $year = now()->format('Y');  // Tambahkan tahun
 
-        $totalIncome = $transactions->where('type', 'income')->sum('amount');
-        $totalExpense = $transactions->where('type', 'expense')->sum('amount');
-        $nettProfit = $totalIncome - $totalExpense;
+    $transactions = Transaction::whereMonth('created_at', now()->month)
+                               ->whereYear('created_at', now()->year)
+                               ->get();
 
-        $reportData = [
-            'month' => $month,  
-            'transactions' => $transactions,
-            'totalIncome' => $totalIncome,
-            'totalExpense' => $totalExpense,
-            'nettProfit' => $nettProfit,
-        ];
+    $totalIncome = $transactions->where('type', 'income')->sum('amount');
+    $totalExpense = $transactions->where('type', 'expense')->sum('amount');
+    $nettProfit = $totalIncome - $totalExpense;
 
-        if ($format === 'pdf') {
-            $pdf = PDF::loadView('reports.monthly_pdf', $reportData);
-            return $pdf->download('monthly_report.pdf');
-        } elseif ($format === 'excel') {
-            return Excel::download(new MonthlyReportExport($reportData), 'monthly_report.xlsx');
-        }
+    $reportData = [
+        'month' => $month,
+        'year' => $year,  // Tambahkan tahun ke dalam reportData
+        'transactions' => $transactions,
+        'totalIncome' => $totalIncome,
+        'totalExpense' => $totalExpense,
+        'nettProfit' => $nettProfit,
+    ];
+
+    if ($format === 'pdf') {
+        $pdf = PDF::loadView('reports.monthly_pdf', $reportData);
+        return $pdf->download('monthly_report.pdf');
+    } elseif ($format === 'excel') {
+        return Excel::download(new MonthlyReportExport($reportData), 'monthly_report.xlsx');
     }
+}
+
 }

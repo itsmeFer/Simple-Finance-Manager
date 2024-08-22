@@ -1,32 +1,34 @@
 <?php
 
+// app/Exports/MonthlyReportExport.php
+
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class MonthlyReportExport implements FromView
+class MonthlyReportExport implements FromArray, WithHeadings
 {
-    public $transactions;
-    public $totalIncome;
-    public $totalExpense;
-    public $nettProfit;
+    protected $reportData;
 
-    public function __construct($transactions, $totalIncome, $totalExpense, $nettProfit)
+    public function __construct(array $reportData)
     {
-        $this->transactions = $transactions;
-        $this->totalIncome = $totalIncome;
-        $this->totalExpense = $totalExpense;
-        $this->nettProfit = $nettProfit;
+        $this->reportData = $reportData;
     }
 
-    public function view(): View
+    public function array(): array
     {
-        return view('reports.monthly_excel', [
-            'transactions' => $this->transactions,
-            'totalIncome' => $this->totalIncome,
-            'totalExpense' => $this->totalExpense,
-            'nettProfit' => $this->nettProfit,
-        ]);
+        return [
+            ['Month', $this->reportData['month']],
+            ['Year', $this->reportData['year']],  // Sertakan tahun dalam export
+            ['Total Income', number_format($this->reportData['totalIncome'], 2)],
+            ['Total Expense', number_format($this->reportData['totalExpense'], 2)],
+            ['Nett Profit', number_format($this->reportData['nettProfit'], 2)],
+        ];
+    }
+
+    public function headings(): array
+    {
+        return ['Description', 'Amount'];
     }
 }

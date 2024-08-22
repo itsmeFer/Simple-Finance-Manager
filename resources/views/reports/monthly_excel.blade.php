@@ -8,7 +8,7 @@
     <title>Monthly Report</title>
 </head>
 <body>
-    <h1>Monthly Report</h1>
+    <h1>Monthly Report for {{ $month }} {{ $year }}</h1>  <!-- Tambahkan tahun -->
 
     <table border="1" cellspacing="0" cellpadding="8">
         <thead>
