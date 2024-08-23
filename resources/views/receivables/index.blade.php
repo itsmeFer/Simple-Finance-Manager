@@ -1,11 +1,11 @@
-<!-- resources/views/debts/index.blade.php -->
+<!-- resources/views/receivables/index.blade.php -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Debts</title>
+    <title>Receivables</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -13,7 +13,7 @@
         <!-- Sidebar -->
         <div class="bg-gray-800 text-gray-100 w-full md:w-1/4 h-screen">
             <div class="p-4">
-                <h1 class="text-xl font-bold">Hutang</h1>
+                <h1 class="text-xl font-bold">Piutang</h1>
             </div>
             <nav class="mt-4">
                 <!-- Add your links similarly as in the users sidebar -->
@@ -33,14 +33,9 @@
 
         <!-- Main Content -->
         <div class="w-full md:w-3/4 p-6">
-            <h2 class="text-2xl font-semibold mb-6">Daftar Hutang</h2>
+            <h2 class="text-2xl font-semibold mb-6">Daftar Piutang</h2>
 
-            <!-- Back to Dashboard Button -->
-            <a href="{{ route('dashboard') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
-                Back to Dashboard
-            </a>
-
-            <!-- Debts List -->
+            <!-- Receivables List -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-800 text-white">
@@ -51,11 +46,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($debts as $debt)
+                        @foreach($receivables as $receivable)
                         <tr>
-                            <td class="border px-4 py-2">{{ $debt->description }}</td>
-                            <td class="border px-4 py-2">{{ number_format($debt->amount, 2) }}</td>
-                            <td class="border px-4 py-2">{{ \Carbon\Carbon::parse($debt->due_date)->format('d-m-Y') }}</td>
+                            <td class="border px-4 py-2">{{ $receivable->description }}</td>
+                            <td class="border px-4 py-2">{{ number_format($receivable->amount, 2) }}</td>
+                            <td class="border px-4 py-2">{{ \Carbon\Carbon::parse($receivable->due_date)->format('d-m-Y') }}</td>
                         </tr>
                         @endforeach
                     </tbody>

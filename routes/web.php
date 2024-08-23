@@ -61,4 +61,8 @@ Route::get('/debts', [DebtController::class, 'index'])->name('debts.index');
 Route::resource('debts', DebtController::class);
 Route::resource('receivables', ReceivableController::class);
 
+Route::get('/download/pdf', [ReportController::class, 'generateReport'])->name('download.pdf');
+Route::get('/download/excel', [ReportController::class, 'generateReport'])->name('download.excel');
+
+
 require __DIR__.'/auth.php';
