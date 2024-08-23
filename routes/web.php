@@ -54,5 +54,11 @@ Route::get('/report/monthly', [ReportController::class, 'monthlyReport'])->name(
 
 
 Route::get('/report/monthly', [ReportController::class, 'generateReport'])->name('report.monthly');
+use App\Http\Controllers\DebtController;
+
+Route::get('/debts', [DebtController::class, 'index'])->name('debts.index');
+
+Route::resource('debts', DebtController::class);
+Route::resource('receivables', ReceivableController::class);
 
 require __DIR__.'/auth.php';
