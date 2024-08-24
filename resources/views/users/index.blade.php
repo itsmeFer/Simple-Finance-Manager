@@ -28,15 +28,6 @@
                 <a href="{{ route('summary') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('summary') ? 'bg-gray-700 text-white' : '' }}">
                     Summary
                 </a>
-                <a href="{{ route('dashboard') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('dashboard') ? 'bg-gray-700 text-white' : '' }}">
-                    Dashboard
-                </a>
-                <a href="{{ route('debts.index') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('debts.index') ? 'bg-gray-700 text-white' : '' }}">
-                    Hutang
-                </a>
-                <a href="{{ route('receivables.index') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('receivables.index') ? 'bg-gray-700 text-white' : '' }}">
-                    Piutang
-                </a>
                 <form method="POST" action="{{ route('logout') }}" class="block py-2.5 px-4">
                     @csrf
                     <button type="submit" class="w-full text-left hover:bg-gray-700 hover:text-white">Logout</button>

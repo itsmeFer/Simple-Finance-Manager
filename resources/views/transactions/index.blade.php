@@ -25,6 +25,9 @@
                 <a href="{{ route('transactions.index') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('transactions.index') ? 'bg-gray-700 text-white' : '' }}">
                     Transactions
                 </a>
+                <a href="{{ route('summary') }}" class="block py-2.5 px-4 hover:bg-gray-700 hover:text-white {{ request()->routeIs('summary') ? 'bg-gray-700 text-white' : '' }}">
+                    Summary
+                </a>
                 <form method="POST" action="{{ route('logout') }}" class="block py-2.5 px-4">
                     @csrf
                     <button type="submit" class="w-full text-left hover:bg-gray-700 hover:text-white">Logout</button>
